@@ -1,0 +1,18 @@
+Package: JiangZhihangTools
+Title: Tools for STAT 3701 homework 3
+Version: 0.0.1
+Authors@R: person("Zhihang", "Jiang", email = "jian0259@umn.edu", role = c("aut", "cre"))
+Description: This is a set of functions, etc for STAT 3701 class homework 3.
+Depends: R (>= 3.4.3)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: testthat,
+    knitr,
+    rmarkdown
+Imports: tidyverse,
+    magrittr,
+    ggplot2,
+    dplyr
+VignetteBuilder: knitr

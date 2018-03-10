@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Zhihang Jiang" />
+
+<meta name="date" content="2018-03-09" />
+
+<title>Vignette for JiangZhihangTools</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Vignette for JiangZhihangTools</h1>
+<h4 class="author"><em>Zhihang Jiang</em></h4>
+<h4 class="date"><em>2018-03-09</em></h4>
+
+
+
+<div id="info" class="section level1">
+<h1>Info</h1>
+<p>This is package is built for quiz3 and homework3, which inclde all functions in pervious homeworks and quizs. It includes three data set and 14 functions. The package can be used to calculate mean, variance and standard deviation. Also it can calcuat MLE for most of distribution and there is an efficient way for gamma distribution. Then it is very useful for matrix calculation.</p>
+</div>
+<div id="data" class="section level1">
+<h1>data</h1>
+<p>there are 3 data set in the package</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data2007 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://users.stat.umn.edu/~almquist/3811_examples/gapminder2007ex.csv&quot;</span>)
+d &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="kw">url</span>(<span class="st">&quot;http://www.stat.umn.edu/geyer/3701/data/q1p4.txt&quot;</span>),<span class="dt">header =</span> <span class="ot">TRUE</span>)
+m&lt;-<span class="kw">url</span>(<span class="st">&quot;http://www.stat.umn.edu/geyer/3701/data/q2p3.rda&quot;</span>)</code></pre></div>
+</div>
+<div id="functions" class="section level1">
+<h1>functions</h1>
+<div id="function1" class="section level2">
+<h2>function1</h2>
+<p>it can calculate Mean, Variance, SD</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">func1 &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  a =<span class="st"> </span><span class="kw">sum</span>(x)<span class="op">/</span><span class="kw">length</span>(x)
+  b =<span class="st"> </span><span class="kw">sum</span>((x<span class="op">-</span>a)<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">length</span>(x)
+  c =<span class="st"> </span><span class="kw">sqrt</span>(b)
+  <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">mean=</span>a,<span class="dt">var=</span>b,<span class="dt">sd=</span>c))
+}
+<span class="kw">func1</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>))</code></pre></div>
+<pre><code>## $mean
+## [1] -0.005892568
+## 
+## $var
+## [1] 0.4529904
+## 
+## $sd
+## [1] 0.6730456</code></pre>
+</div>
+<div id="function2" class="section level2">
+<h2>function2</h2>
+<p>It also calculate Mean,Variance,SD and it can check the input data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">func2 &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(x))
+  <span class="kw">stopifnot</span>(<span class="kw">length</span>(x)<span class="op">!=</span><span class="dv">0</span>)
+  <span class="kw">stopifnot</span>(<span class="kw">is.finite</span>(x))
+  <span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">is.na</span>(x))
+  <span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">is.nan</span>(x))
+  
+  a =<span class="st"> </span><span class="kw">sum</span>(x)<span class="op">/</span><span class="kw">length</span>(x)
+  b =<span class="st"> </span><span class="kw">sum</span>((x<span class="op">-</span>a)<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">length</span>(x)
+  c =<span class="st"> </span><span class="kw">sqrt</span>(b)
+  <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">mean=</span>a,<span class="dt">var=</span>b,<span class="dt">sd=</span>c))
+}
+<span class="kw">func2</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>))</code></pre></div>
+<pre><code>## $mean
+## [1] 0.5652255
+## 
+## $var
+## [1] 1.275408
+## 
+## $sd
+## [1] 1.12934</code></pre>
+</div>
+<div id="function3" class="section level2">
+<h2>function3</h2>
+<p>This function3 computes the liklihood of a gamma distribution</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">func3 &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  alpha &lt;-<span class="st"> </span>pi
+  log &lt;-<span class="st"> </span><span class="cf">function</span>(alpha)
+    <span class="kw">sum</span>(<span class="kw">dgamma</span>(x, <span class="dt">shape =</span> alpha, <span class="dt">log =</span> <span class="ot">TRUE</span>))
+  interval &lt;-<span class="st"> </span><span class="kw">mean</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(x)
+  interval &lt;-<span class="st"> </span><span class="kw">pmax</span>(<span class="kw">mean</span>(x) <span class="op">/</span><span class="st"> </span><span class="fl">1e3</span>, interval)
+  
+  oout&lt;-<span class="st"> </span><span class="kw">optimize</span>(log, <span class="dt">maximum =</span> <span class="ot">TRUE</span>, interval)
+  <span class="kw">return</span> (oout<span class="op">$</span>maximum)
+}
+x &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="kw">url</span>(<span class="st">&quot;http://www.stat.umn.edu/geyer/3701/data/q1p3.txt&quot;</span>))
+<span class="kw">func3</span>(x)</code></pre></div>
+<pre><code>## [1] 2.962401</code></pre>
+</div>
+<div id="function4" class="section level2">
+<h2>function4</h2>
+<p>function4 calculates weigthed Mean,Variance,SD</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">func4 &lt;-<span class="st"> </span><span class="cf">function</span>(d){
+  
+  a =<span class="st"> </span><span class="kw">sum</span>(d<span class="op">$</span>x <span class="op">*</span><span class="st"> </span>d<span class="op">$</span>p)
+  b =<span class="st"> </span><span class="kw">sum</span>(((d<span class="op">$</span>x <span class="op">-</span><span class="st"> </span>a)<span class="op">^</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>d<span class="op">$</span>p)
+  c =<span class="st"> </span><span class="kw">sqrt</span>(b)
+  <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">mean=</span>a,<span class="dt">var=</span>b,<span class="dt">sd=</span>c))
+  
+}
+
+<span class="kw">func4</span>(d)</code></pre></div>
+<pre><code>## $mean
+## [1] 4.940558
+## 
+## $var
+## [1] 16.12654
+## 
+## $sd
+## [1] 4.015786</code></pre>
+</div>
+<div id="function5" class="section level2">
+<h2>function5</h2>
+<p>function5 calculates Mean,Variance,SD with checking the input data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">func5 &lt;-<span class="st"> </span><span class="cf">function</span>(d){
+  
+  <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(d<span class="op">$</span>x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(d<span class="op">$</span>p))
+  
+  <span class="kw">stopifnot</span>(<span class="kw">length</span>(d<span class="op">$</span>x)<span class="op">!=</span><span class="dv">0</span>)
+  <span class="kw">stopifnot</span>(<span class="kw">length</span>(d<span class="op">$</span>p)<span class="op">!=</span><span class="dv">0</span>)
+  
+  <span class="kw">stopifnot</span>(<span class="kw">is.finite</span>(d<span class="op">$</span>x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.finite</span>(d<span class="op">$</span>p))
+  
+  <span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">is.na</span>(d<span class="op">$</span>x))
+  <span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">is.na</span>(d<span class="op">$</span>p))
+  
+  <span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">is.nan</span>(d<span class="op">$</span>x))
+  <span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">is.nan</span>(d<span class="op">$</span>p))
+  
+  <span class="kw">stopifnot</span>(<span class="kw">all.equal</span>(<span class="kw">sum</span>(d<span class="op">$</span>p),<span class="dv">1</span>))
+  
+  a =<span class="st"> </span><span class="kw">sum</span>(d<span class="op">$</span>x <span class="op">*</span><span class="st"> </span>d<span class="op">$</span>p)
+  b =<span class="st"> </span><span class="kw">sum</span>(((d<span class="op">$</span>x <span class="op">-</span><span class="st"> </span>a)<span class="op">^</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>d<span class="op">$</span>p)
+  c =<span class="st"> </span><span class="kw">sqrt</span>(b)
+  <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">mean=</span>a,<span class="dt">var=</span>b,<span class="dt">sd=</span>c))
+  
+}
+a&lt;-<span class="kw">read.table</span>(<span class="kw">url</span>(<span class="st">&quot;http://www.stat.umn.edu/geyer/3701/data/q1p4.txt&quot;</span>),
+    <span class="dt">header =</span> <span class="ot">TRUE</span>)
+<span class="kw">func5</span>(a)</code></pre></div>
+<pre><code>## $mean
+## [1] 4.940558
+## 
+## $var
+## [1] 16.12654
+## 
+## $sd
+## [1] 4.015786</code></pre>
+</div>
+<div id="function6" class="section level2">
+<h2>function6</h2>
+<p>function6 calculates weighted Mean,Variance,SD with checking the input data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">func6&lt;-<span class="cf">function</span>(x,y)
+{
+  <span class="cf">if</span>(<span class="op">!</span><span class="kw">length</span>(y)<span class="op">&gt;</span><span class="dv">0</span>){
+    <span class="kw">print</span>(<span class="st">&quot;length of the second input is not positive&quot;</span>)
+  }<span class="cf">else</span> <span class="cf">if</span>(<span class="op">!</span><span class="kw">length</span>(x)<span class="op">&gt;</span><span class="dv">0</span>){
+    <span class="kw">print</span>(<span class="st">&quot;the length of first input is not positive&quot;</span>)
+  }<span class="cf">else</span> <span class="cf">if</span>(<span class="op">!</span><span class="kw">is.numeric</span>(x)){
+    <span class="kw">print</span>(<span class="st">&quot;the first input is not numeric&quot;</span>)
+  }<span class="cf">else</span> <span class="cf">if</span>(<span class="op">!</span><span class="kw">is.numeric</span>(y)){
+    <span class="kw">print</span>(<span class="st">&quot;the second input is not numeric&quot;</span>)
+  }<span class="cf">else</span> <span class="cf">if</span>(<span class="kw">sum</span>(<span class="kw">is.finite</span>(x))<span class="op">!=</span><span class="kw">length</span>(x)){
+    <span class="kw">print</span>(<span class="st">&quot;the first input has infinite elements&quot;</span>)
+  }<span class="cf">else</span> <span class="cf">if</span>(<span class="kw">sum</span>(<span class="kw">is.finite</span>(y))<span class="op">!=</span><span class="kw">length</span>(y)){
+    <span class="kw">print</span>(<span class="st">&quot;the second input has infinite elements&quot;</span>)
+  }<span class="cf">else</span> <span class="cf">if</span>(<span class="kw">length</span>(y)<span class="op">!=</span><span class="kw">length</span>(x)){
+    <span class="kw">print</span>(<span class="st">&quot;the lenghs of two input are not equal&quot;</span>)
+  }<span class="cf">else</span> <span class="cf">if</span>(<span class="op">!</span><span class="kw">isTRUE</span>(<span class="kw">all.equal</span>(<span class="kw">sum</span>(y),<span class="dv">1</span>))){
+    <span class="kw">print</span>(<span class="st">&quot;the sum of second input is not equal to 1&quot;</span>)
+  }<span class="cf">else</span> <span class="cf">if</span>(<span class="kw">sum</span>(y<span class="op">&gt;</span><span class="dv">0</span>)<span class="op">!=</span><span class="kw">length</span>(y)){
+    <span class="kw">print</span>(<span class="st">&quot;second input have negative elements&quot;</span>)
+  }<span class="cf">else</span>{
+    mu&lt;-<span class="kw">sum</span>((x)<span class="op">*</span>y)
+    si&lt;-<span class="kw">sum</span>(((x<span class="op">-</span>mu)<span class="op">^</span><span class="dv">2</span>)<span class="op">*</span>y)
+    <span class="kw">data.frame</span>(<span class="dt">mean =</span> mu,<span class="dt">variance =</span> si, <span class="dt">sd =</span> <span class="kw">sqrt</span>(si))
+  }
+}
+<span class="kw">func6</span>(<span class="dv">1</span>,<span class="ot">Inf</span>)</code></pre></div>
+<pre><code>## [1] &quot;the second input has infinite elements&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">func6</span>(<span class="dv">1</span>,<span class="st">&quot;a&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;the second input is not numeric&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">func6</span>(<span class="kw">double</span>(<span class="dv">0</span>),<span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] &quot;the length of first input is not positive&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">func6</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] &quot;the sum of second input is not equal to 1&quot;</code></pre>
+</div>
+<div id="function7" class="section level2">
+<h2>function7</h2>
+<p>Computes the liklihood of a given distribution for data x</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">func7 &lt;-<span class="st"> </span><span class="cf">function</span>(x, func, interval){
+  
+  f7 &lt;-<span class="st"> </span><span class="cf">function</span>(theta, x)
+  {<span class="kw">sum</span>(<span class="kw">func</span>(theta, x))}
+  
+  oout&lt;-<span class="st"> </span><span class="kw">optimize</span>(f7, <span class="dt">maximum =</span> <span class="ot">TRUE</span>, interval, <span class="dt">x=</span>x)
+  <span class="kw">return</span>(oout<span class="op">$</span>maximum)
+} 
+x1=<span class="kw">rgamma</span>(<span class="dv">100</span>,<span class="dv">3</span>)
+f =<span class="st"> </span><span class="cf">function</span>(theta, x) <span class="kw">dgamma</span>(x, <span class="dt">shape =</span> theta, <span class="dt">log =</span> <span class="ot">TRUE</span>)
+<span class="kw">func7</span>(x1,f,<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3</span>))</code></pre></div>
+<pre><code>## [1] 2.999938</code></pre>
+</div>
+<div id="function8" class="section level2">
+<h2>function8</h2>
+<p>function8 calculates matrix multiplcation <span class="math inline">\(x^T A^{-1} x\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">func8&lt;-<span class="cf">function</span>(a,x){
+  <span class="kw">stopifnot</span>(<span class="kw">is.matrix</span>(a))
+  <span class="kw">stopifnot</span>(<span class="kw">is.vector</span>(x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(a))
+  <span class="kw">stopifnot</span>(<span class="kw">is.finite</span>(x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.finite</span>(a))
+  <span class="kw">stopifnot</span>(<span class="kw">nrow</span>(a)<span class="op">==</span><span class="kw">ncol</span>(a))
+  <span class="kw">stopifnot</span>(<span class="kw">nrow</span>(a)<span class="op">==</span><span class="kw">length</span>(x))
+  m=<span class="kw">solve</span>(a,x)
+  <span class="kw">sum</span>(x<span class="op">*</span>m)
+}
+<span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://www.stat.umn.edu/geyer/3701/data/q2p1.rda&quot;</span>))
+<span class="kw">func8</span>(a,x)</code></pre></div>
+<pre><code>## [1] 13</code></pre>
+</div>
+<div id="function9" class="section level2">
+<h2>function9</h2>
+<p>function9 calculates matrix multiplcation <span class="math inline">\(x^T A^{-1} x\)</span> as a binary operator</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;%func9%&quot;</span> &lt;-<span class="cf">function</span>(a,x){
+  <span class="kw">stopifnot</span>(<span class="kw">is.matrix</span>(a))
+  <span class="kw">stopifnot</span>(<span class="kw">is.vector</span>(x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(a))
+  <span class="kw">stopifnot</span>(<span class="kw">is.finite</span>(x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.finite</span>(a))
+  <span class="kw">stopifnot</span>(<span class="kw">nrow</span>(a)<span class="op">==</span><span class="kw">ncol</span>(a))
+  <span class="kw">stopifnot</span>(<span class="kw">nrow</span>(a)<span class="op">==</span><span class="kw">length</span>(x))
+  m=<span class="kw">solve</span>(a,x)
+  <span class="kw">sum</span>(x<span class="op">*</span>m)
+}
+<span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://www.stat.umn.edu/geyer/3701/data/q2p1.rda&quot;</span>))
+a<span class="op">%func9%</span>x</code></pre></div>
+<pre><code>## [1] 13</code></pre>
+</div>
+<div id="function10" class="section level2">
+<h2>function10</h2>
+<p>function10 standardizes matrix</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">func10&lt;-<span class="cf">function</span>(x){
+  <span class="kw">stopifnot</span>(<span class="kw">nrow</span>(x)<span class="op">&gt;</span><span class="dv">1</span>)
+  <span class="kw">stopifnot</span>(<span class="kw">is.matrix</span>(x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.finite</span>(x))
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(x)){
+    x[,i]=(x[,i]<span class="op">-</span><span class="kw">mean</span>(x[,i]))<span class="op">/</span><span class="kw">sd</span>(x[,i])
+  }
+  x
+}
+<span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://www.stat.umn.edu/geyer/3701/data/q2p3.rda&quot;</span>))
+<span class="kw">func10</span>(a)</code></pre></div>
+<pre><code>##            [,1]       [,2]       [,3]        [,4]
+## [1,]  0.7035431 -0.4380029  1.3181419 -0.37408291
+## [2,] -1.0113432  0.8760058 -0.4524965  0.02200488
+## [3,] -0.6156002  0.7117547 -0.5705390  1.21026823
+## [4,]  1.4950291  1.0402568 -1.3968369 -0.24205365
+## [5,] -0.8794289 -1.2592583  0.8459717 -1.56234625
+## [6,]  0.3078001 -0.9307561  0.2557589  0.94620970</code></pre>
+</div>
+<div id="function11" class="section level2">
+<h2>function11</h2>
+<p>function11 standardizes matrix without loop</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">func11&lt;-<span class="cf">function</span>(x){
+  <span class="kw">stopifnot</span>(<span class="kw">is.matrix</span>(x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(x))
+  <span class="kw">stopifnot</span>(<span class="kw">is.finite</span>(x))
+  FUN&lt;-<span class="cf">function</span>(x)
+  {
+    x&lt;-(x<span class="op">-</span><span class="kw">mean</span>(x))<span class="op">/</span><span class="kw">sd</span>(x)
+  }
+  <span class="kw">apply</span>(x,<span class="dv">2</span>,FUN)    
+}
+<span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://www.stat.umn.edu/geyer/3701/data/q2p3.rda&quot;</span>))
+<span class="kw">func11</span>(a)</code></pre></div>
+<pre><code>##            [,1]       [,2]       [,3]        [,4]
+## [1,]  0.7035431 -0.4380029  1.3181419 -0.37408291
+## [2,] -1.0113432  0.8760058 -0.4524965  0.02200488
+## [3,] -0.6156002  0.7117547 -0.5705390  1.21026823
+## [4,]  1.4950291  1.0402568 -1.3968369 -0.24205365
+## [5,] -0.8794289 -1.2592583  0.8459717 -1.56234625
+## [6,]  0.3078001 -0.9307561  0.2557589  0.94620970</code></pre>
+</div>
+<div id="myapply" class="section level2">
+<h2>myapply</h2>
+<p>It is similar with apply function</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myapply &lt;-<span class="st"> </span><span class="cf">function</span>(x,MARGIN,FUN,...)
+{
+  <span class="cf">if</span>(<span class="kw">length</span>(<span class="kw">dim</span>(x))<span class="op">!=</span><span class="dv">2</span>)
+  {
+    <span class="kw">stop</span>(<span class="st">&quot;matrix is not 2d&quot;</span>)
+  }
+  <span class="cf">if</span>(<span class="op">!</span>(MARGIN <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)))
+  {
+    <span class="kw">stop</span>(<span class="st">&quot;margin is not in 1 or 2&quot;</span>)
+  }
+  R=<span class="kw">dim</span>(x)[<span class="dv">1</span>]
+  C=<span class="kw">dim</span>(x)[<span class="dv">2</span>]
+  f=<span class="st"> </span><span class="kw">match.fun</span>(FUN)
+  <span class="cf">if</span>(MARGIN<span class="op">==</span><span class="dv">1</span>)
+  {
+    result=<span class="kw">list</span>()
+    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>R)
+    {
+      result[[i]]=<span class="kw">f</span>(x[i,],...)
+    }
+  }<span class="cf">else</span> <span class="cf">if</span>(MARGIN<span class="op">==</span><span class="dv">2</span>)
+  {
+    result=<span class="kw">list</span>()
+    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>C)
+    {
+      result[[j]]=<span class="kw">f</span>(x[,j],...)
+    }
+  }
+  <span class="kw">return</span>(<span class="kw">simplify2array</span>(result))
+}
+fred=<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>,<span class="dt">nrow =</span> <span class="dv">3</span>)
+<span class="kw">rownames</span>(fred)=<span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;white&quot;</span>,<span class="st">&quot;blue&quot;</span>)
+<span class="kw">colnames</span>(fred)=<span class="kw">c</span>(<span class="st">&quot;car&quot;</span>,<span class="st">&quot;truck&quot;</span>)
+<span class="kw">myapply</span>(fred, <span class="dv">1</span>, mean)</code></pre></div>
+<pre><code>## [1] 2.5 3.5 4.5</code></pre>
+</div>
+<div id="mlefunc" class="section level2">
+<h2>MLEfunc</h2>
+<p>It is same as function7</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MLEfunc&lt;-<span class="cf">function</span>(x,f,interval){
+  logl&lt;-<span class="cf">function</span>(theta){
+  <span class="kw">sum</span>(<span class="kw">f</span>(theta,x))
+  }
+  oout&lt;-<span class="kw">optimize</span>(logl,<span class="dt">maximum=</span><span class="ot">TRUE</span>,interval)
+  oout<span class="op">$</span>maximum
+}
+x1=<span class="kw">rgamma</span>(<span class="dv">100</span>,<span class="dv">3</span>)
+f =<span class="st"> </span><span class="cf">function</span>(theta, x) <span class="kw">dgamma</span>(x, <span class="dt">shape =</span> theta, <span class="dt">log =</span> <span class="ot">TRUE</span>)
+<span class="kw">MLEfunc</span>(x1,f,<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3</span>))</code></pre></div>
+<pre><code>## [1] 2.999955</code></pre>
+</div>
+<div id="plot-function" class="section level2">
+<h2>plot function</h2>
+<p>Wrapper function for ggplot2 for data d</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotMyData&lt;-<span class="cf">function</span>(x){
+  <span class="kw">library</span>(magrittr)
+  x<span class="op">%&gt;%</span><span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>()<span class="op">+</span>ggplot2<span class="op">::</span><span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>p)<span class="op">+</span>ggplot2<span class="op">::</span><span class="kw">geom_point</span>()
+}
+<span class="kw">plotMyData</span>(d)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="select-function" class="section level2">
+<h2>select function</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">selectmydata&lt;-<span class="cf">function</span>(x){
+  <span class="kw">library</span>(magrittr)
+  <span class="kw">library</span>(tidyverse)
+  <span class="kw">library</span>(dplyr)
+  xa&lt;-data2007<span class="op">%&gt;%</span>
+<span class="kw">select</span>(gdpPercap, pop) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="kw">mutate</span>(<span class="dt">gdp =</span> pop <span class="op">*</span><span class="st"> </span>gdpPercap)
+  <span class="kw">return</span>(xa)
+}
+<span class="kw">selectmydata</span>(data2007)</code></pre></div>
+<pre><code>## -- Attaching packages -------------------------------------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## √ ggplot2 2.2.1     √ purrr   0.2.4
+## √ tibble  1.4.2     √ dplyr   0.7.4
+## √ tidyr   0.8.0     √ stringr 1.2.0
+## √ readr   1.1.1     √ forcats 0.2.0</code></pre>
+<pre><code>## -- Conflicts ----------------------------------------------------------------------------------------- tidyverse_conflicts() --
+## x tidyr::extract()   masks magrittr::extract()
+## x dplyr::filter()    masks stats::filter()
+## x dplyr::lag()       masks stats::lag()
+## x purrr::set_names() masks magrittr::set_names()</code></pre>
+<pre><code>##      gdpPercap        pop          gdp
+## 1     974.5803   31889923 3.107929e+10
+## 2    5937.0295    3600523 2.137641e+10
+## 3    6223.3675   33333216 2.074449e+11
+## 4    4797.2313   12420476 5.958390e+10
+## 5   12779.3796   40301927 5.150336e+11
+## 6   34435.3674   20434176 7.036584e+11
+## 7   36126.4927    8199783 2.962294e+11
+## 8   29796.0483     708573 2.111268e+10
+## 9    1391.2538  150448339 2.093118e+11
+## 10  33692.6051   10392226 3.501412e+11
+## 11   1441.2849    8078314 1.164315e+10
+## 12   3822.1371    9119152 3.485465e+10
+## 13   7446.2988    4552198 3.389703e+10
+## 14  12569.8518    1639131 2.060363e+10
+## 15   9065.8008  190010647 1.722599e+12
+## 16  10680.7928    7322858 7.821393e+10
+## 17   1217.0330   14326203 1.743546e+10
+## 18    430.0707    8390505 3.608510e+09
+## 19   1713.7787   14131858 2.421888e+10
+## 20   2042.0952   17696293 3.613752e+10
+## 21  36319.2350   33390141 1.212704e+12
+## 22    706.0165    4369038 3.084613e+09
+## 23   1704.0637   10238807 1.744758e+10
+## 24  13171.6388   16284741 2.144967e+11
+## 25   4959.1149 1318683096 6.539501e+12
+## 26   7006.5804   44227550 3.098839e+11
+## 27    986.1479     710960 7.011117e+08
+## 28    277.5519   64606759 1.793173e+10
+## 29   3632.5578    3800610 1.380594e+10
+## 30   9645.0614    4133884 3.987157e+10
+## 31   1544.7501   18013409 2.782622e+10
+## 32  14619.2227    4493312 6.568873e+10
+## 33   8948.1029   11416987 1.021604e+11
+## 34  22833.3085   10228744 2.335561e+11
+## 35  35278.4187    5468120 1.929066e+11
+## 36   2082.4816     496374 1.033690e+09
+## 37   6025.3748    9319622 5.615422e+10
+## 38   6873.2623   13755680 9.454640e+10
+## 39   5581.1810   80264543 4.479709e+11
+## 40   5728.3535    6939688 3.975299e+10
+## 41  12154.0897     551201 6.699346e+09
+## 42    641.3695    4906585 3.146934e+09
+## 43    690.8056   76511887 5.285484e+10
+## 44  33207.0844    5238460 1.739540e+11
+## 45  30470.0167   61083916 1.861228e+12
+## 46  13206.4845    1454867 1.921368e+10
+## 47    752.7497    1688359 1.270912e+09
+## 48  32170.3744   82400996 2.650871e+12
+## 49   1327.6089   22873338 3.036685e+10
+## 50  27538.4119   10706290 2.948342e+11
+## 51   5186.0500   12572928 6.520383e+10
+## 52    942.6542    9947814 9.377349e+09
+## 53    579.2317    1472041 8.526529e+08
+## 54   1201.6372    8502814 1.021730e+10
+## 55   3548.3308    7483763 2.655487e+10
+## 56  39724.9787    6980412 2.772967e+11
+## 57  18008.9444    9956108 1.792990e+11
+## 58  36180.7892     301931 1.092410e+10
+## 59   2452.2104 1110396331 2.722925e+12
+## 60   3540.6516  223547000 7.915020e+11
+## 61  11605.7145   69453570 8.060583e+11
+## 62   4471.0619   27499638 1.229526e+11
+## 63  40675.9964    4109086 1.671412e+11
+## 64  25523.2771    6426679 1.640299e+11
+## 65  28569.7197   58147733 1.661264e+12
+## 66   7320.8803    2780132 2.035301e+10
+## 67  31656.0681  127467972 4.035135e+12
+## 68   4519.4612    6053193 2.735717e+10
+## 69   1463.2493   35610177 5.210657e+10
+## 70   1593.0655   23301725 3.712117e+10
+## 71  23348.1397   49044790 1.145105e+12
+## 72  47306.9898    2505559 1.185305e+11
+## 73  10461.0587    3921278 4.102072e+10
+## 74   1569.3314    2012649 3.158513e+09
+## 75    414.5073    3193942 1.323912e+09
+## 76  12057.4993    6036914 7.279009e+10
+## 77   1044.7701   19167654 2.002579e+10
+## 78    759.3499   13327079 1.011992e+10
+## 79  12451.6558   24821286 3.090661e+11
+## 80   1042.5816   12031795 1.254413e+10
+## 81   1803.1515    3270065 5.896423e+09
+## 82  10956.9911    1250882 1.370590e+10
+## 83  11977.5750  108700891 1.301973e+12
+## 84   3095.7723    2874127 8.897643e+09
+## 85   9253.8961     684736 6.336476e+09
+## 86   3820.1752   33757175 1.289583e+11
+## 87    823.6856   19951656 1.643389e+10
+## 88    944.0000   47761980 4.508731e+10
+## 89   4811.0604    2055080 9.887114e+09
+## 90   1091.3598   28901790 3.154225e+10
+## 91  36797.9333   16570613 6.097643e+11
+## 92  25185.0091    4115771 1.036557e+11
+## 93   2749.3210    5675356 1.560338e+10
+## 94    619.6769   12894865 7.990650e+09
+## 95   2013.9773  135031164 2.719497e+11
+## 96  49357.1902    4627926 2.284214e+11
+## 97  22316.1929    3204897 7.152110e+10
+## 98   2605.9476  169270617 4.411104e+11
+## 99   9809.1856    3242173 3.180308e+10
+## 100  4172.8385    6667147 2.782093e+10
+## 101  7408.9056   28674757 2.124486e+11
+## 102  3190.4810   91077287 2.905804e+11
+## 103 15389.9247   38518241 5.927928e+11
+## 104 20509.6478   10642836 2.182808e+11
+## 105 19328.7090    3942491 7.620326e+10
+## 106  7670.1226     798094 6.121479e+09
+## 107 10808.4756   22276056 2.407702e+11
+## 108   863.0885    8860588 7.647471e+09
+## 109  1598.4351     199579 3.190141e+08
+## 110 21654.8319   27601038 5.976958e+11
+## 111  1712.4721   12267493 2.100774e+10
+## 112  9786.5347   10150265 9.933592e+10
+## 113   862.5408    6144562 5.299935e+09
+## 114 47143.1796    4553009 2.146433e+11
+## 115 18678.3144    5447502 1.017502e+11
+## 116 25768.2576    2009245 5.177474e+10
+## 117   926.1411    9118773 8.445270e+09
+## 118  9269.6578   43997828 4.078448e+11
+## 119 28821.0637   40448191 1.165760e+12
+## 120  3970.0954   20378239 8.090355e+10
+## 121  2602.3950   42292929 1.100629e+11
+## 122  4513.4806    1133066 5.114071e+09
+## 123 33859.7484    9031088 3.057904e+11
+## 124 37506.4191    7554661 2.833483e+11
+## 125  4184.5481   19314747 8.082349e+10
+## 126 28718.2768   23174294 6.655258e+11
+## 127  1107.4822   38139640 4.223897e+10
+## 128  7458.3963   65068149 4.853040e+11
+## 129   882.9699    5701579 5.034323e+09
+## 130 18008.5092    1056608 1.902793e+10
+## 131  7092.9230   10276158 7.288800e+10
+## 132  8458.2764   71158647 6.018795e+11
+## 133  1056.3801   29170398 3.081503e+10
+## 134 33203.2613   60776238 2.017969e+12
+## 135 42951.6531  301139947 1.293446e+13
+## 136 10611.4630    3447496 3.658298e+10
+## 137 11415.8057   26084662 2.977774e+11
+## 138  2441.5764   85262356 2.081746e+11
+## 139  3025.3498    4018332 1.215686e+10
+## 140  2280.7699   22211743 5.065987e+10
+## 141  1271.2116   11746035 1.493170e+10
+## 142   469.7093   12311143 5.782658e+09</code></pre>
+</div>
+</div>
+<div id="more-example" class="section level1">
+<h1>more example</h1>
+<p>It is for making up Quiz 3</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">ggplot</span>(d)<span class="op">+</span>ggplot2<span class="op">::</span><span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>p)<span class="op">+</span>ggplot2<span class="op">::</span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">ggplot</span>(d)<span class="op">+</span>ggplot2<span class="op">::</span><span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>p)<span class="op">+</span>ggplot2<span class="op">::</span><span class="kw">geom_line</span>()</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">ggplot</span>(d)<span class="op">+</span>ggplot2<span class="op">::</span><span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>p)<span class="op">+</span>ggplot2<span class="op">::</span><span class="kw">geom_area</span>()</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
